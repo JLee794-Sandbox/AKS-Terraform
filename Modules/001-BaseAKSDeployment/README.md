@@ -6,12 +6,27 @@ In this module you will be constructing a basic Terraform deployment around AKS,
 
 - [Learning Module 001 - Base AKS Deployment](#learning-module-001---base-aks-deployment)
   - [Table of Contents](#table-of-contents)
+  - [Learning Objectives](#learning-objectives)
   - [Section 1 - Working with Terraform Docs](#section-1---working-with-terraform-docs)
   - [Section 2 - Configure your Terraform Azure Provider](#section-2---configure-your-terraform-azure-provider)
   - [Section 3 - Constructing AKS Terraform Template](#section-3---constructing-aks-terraform-template)
   - [Section 4 - Deploy Terraform Configuration to Azure](#section-4---deploy-terraform-configuration-to-azure)
   - [Additional Documentation Relevant to this Lab](#additional-documentation-relevant-to-this-lab)
   - [Next Steps](#next-steps)
+
+
+## Learning Objectives
+
+> TODO: Capture learning objectives with Sections as context
+ 
+- Baseline familiarity with online Terraform documentation
+- Exposure into the base building blocks for Terraform
+- Configuring the AzureRM provider
+- Familiarity around basic Terraform CLI commands
+- Execute initial base Terraform deployment
+
+
+> TODO: Add Section to access and validate AKS cluster
 
 ## Section 1 - Working with Terraform Docs
 
