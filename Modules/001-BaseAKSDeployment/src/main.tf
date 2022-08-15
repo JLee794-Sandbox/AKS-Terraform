@@ -7,7 +7,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   name                = "lab01-demo-cluster"
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  # dns_prefix          = "exampleaks1"
+  dns_prefix          = "exampleaks1"
 
   default_node_pool {
     name       = "default"

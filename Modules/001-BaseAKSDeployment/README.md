@@ -1,12 +1,14 @@
 # Learning Module 001 - Base AKS Deployment
 
 In this module you will be constructing a basic Terraform deployment around AKS, and how you can begin to organize and structure your code.
+<br/><br/><br/>
 
 ## Table of Contents
 
 - [Learning Module 001 - Base AKS Deployment](#learning-module-001---base-aks-deployment)
   - [Table of Contents](#table-of-contents)
   - [Learning Objectives](#learning-objectives)
+  - [Section 0 - Install and Configure Terraform](#section-0---install-and-configure-terraform)
   - [Section 1 - Working with Terraform Docs](#section-1---working-with-terraform-docs)
   - [Section 2 - Configure your Terraform Azure Provider](#section-2---configure-your-terraform-azure-provider)
   - [Section 3 - Constructing AKS Terraform Template](#section-3---constructing-aks-terraform-template)
@@ -14,6 +16,7 @@ In this module you will be constructing a basic Terraform deployment around AKS,
   - [Additional Documentation Relevant to this Lab](#additional-documentation-relevant-to-this-lab)
   - [Next Steps](#next-steps)
 
+<br/><br/><br/>
 
 ## Learning Objectives
 
@@ -27,6 +30,21 @@ In this module you will be constructing a basic Terraform deployment around AKS,
 
 
 > TODO: Add Section to access and validate AKS cluster
+
+<br/><br/><br/>
+
+
+## Section 0 - Install and Configure Terraform
+
+---
+
+If you haven't already done so, install and configure Terraform using one of the following options:
+
+- [Configure Terraform in Azure Cloud Shell with Bash](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-cloud-shell-bash)
+- [Configure Terraform in Azure Cloud Shell with PowerShell](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-cloud-shell-powershell)
+- [Configure Terraform in Windows with Bash](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-windows-bash)
+- [Configure Terraform in Windows with PowerShell](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-windows-powershell)
+
 
 ## Section 1 - Working with Terraform Docs
 
@@ -69,7 +87,7 @@ You can continue reading more about Providers in the [official Terraform documen
         required_providers {
           azurerm = {
             source  = "hashicorp/azurerm"
-            version = "=3.0.0"
+            version = "=3.18.0" # Version of the AzureRM API AKS resource while Lab was being developed
           }
         }
       }
@@ -163,8 +181,7 @@ You can continue reading more about Providers in the [official Terraform documen
          - repeat what you did for the resource group, and rename the `"example"` to `"this"`
       2. Give a name for your AKS cluster for the `"name"` argument. For this lab, I will be using `lab01-demo-cluster`.
       3. Update the resource group attributes to point to the new name we gave in the previous step for the resource group from `azurerm_resource_group.**example**` to `azurerm_resource_group.**this**`
-      4. Remove the `dns_prefix` argument, as this is an [Optional argument](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#dns_prefix) for this deployment.
-      5. Update the `tags` mapping to:
+      4. Update the `tags` mapping to:
         ```hcl
           tags = {
             Environment = "dev" // Or whichever environment naming convention you would like to use for sandboxing/development
@@ -172,14 +189,14 @@ You can continue reading more about Providers in the [official Terraform documen
             Owner = "resourceOwner@myCompany.com"
           }
         ```
-      6. Completing this step, your `azurerm_kubernetes_cluster` resource block should look like the following:
+      5. Completing this step, your `azurerm_kubernetes_cluster` resource block should look like the following:
 
       ```hcl
         resource "azurerm_kubernetes_cluster" "this" {
           name                = "lab01-demo-cluster"
           location            = azurerm_resource_group.this.location
           resource_group_name = azurerm_resource_group.this.name
-          # dns_prefix          = "exampleaks1" // This line should be missing or commented like shown here.
+          dns_prefix          = "exampleaks1"
 
           default_node_pool {
             name       = "default"
@@ -215,13 +232,13 @@ You can continue reading more about Providers in the [official Terraform documen
           }
         ```
 
-   1. Add a new `output` block and name it "`id`"
+   2. Add a new `output` block and name it "`id`"
 
       ```hcl
         output "id" {}
       ```
 
-   1. Specify a `description` for the output object
+   3. Specify a `description` for the output object
 
       ```hcl
         output "id" {
@@ -229,7 +246,7 @@ You can continue reading more about Providers in the [official Terraform documen
         }
       ```
 
-   1. Map the attribute (output) of the AKS Terraform resource to the output block's `value` by referencing the [Terraform Resource Attribute Documentation for AKS](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#attributes-reference)
+   4. Map the attribute (output) of the AKS Terraform resource to the output block's `value` by referencing the [Terraform Resource Attribute Documentation for AKS](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#attributes-reference)
 
       ```hcl
         output "id" {

@@ -6,13 +6,18 @@ This module will give you a brief introduction over Infrastructure-as-Code with 
 
 - [Module 000 - Terraform Introduction](#module-000---terraform-introduction)
   - [Table of Contents](#table-of-contents)
+  - [Quick Comparison of Tools (ARM/Bicep vs Terraform)](#quick-comparison-of-tools-armbicep-vs-terraform)
   - [What is Infrastructure as Code with Terraform?](#what-is-infrastructure-as-code-with-terraform)
     - [Manage any infrastructure](#manage-any-infrastructure)
     - [Standardize your deployment workflow](#standardize-your-deployment-workflow)
     - [Track your infrastructure](#track-your-infrastructure)
     - [Collaborate](#collaborate)
-    - [Install and Configure Terraform](#install-and-configure-terraform)
 
+## Quick Comparison of Tools (ARM/Bicep vs Terraform)
+
+From a high-level, one of the major benefits of using Terraform over ARM/Bicep as your core IaC tooling is its capability to support multiple clouds - meaning your internal teams will only need to know a single tool to manage multiple clouds. Until recently, one of the major disadvantages of using Terraform on Azure was that Terraform depended on the `AzureRM` provider to get updated to leverage the latest `AzureRM` API releases. This has since been mitigated through the [AzAPI](https://registry.terraform.io/providers/azure/azapi/latest/docs) provider which lets you plug directly into the `AzureRM` API where you can specify the latest API versions without the Terraform `AzureRM` provider.
+
+Continue reading for a more in-depth comparison on [MS Article: Comparing Terraform and Bicep](https://docs.microsoft.com/en-us/azure/developer/terraform/comparing-terraform-and-bicep)
 
 ## What is Infrastructure as Code with Terraform?
 
@@ -59,14 +64,5 @@ Terraform keeps track of your real infrastructure in a state file, which acts as
 Terraform allows you to collaborate on your infrastructure with its remote state backends. When you use Terraform Cloud (free for up to five users), you can securely share your state with your teammates, provide a stable environment for Terraform to run in, and prevent race conditions when multiple people make configuration changes at once.
 
 You can also connect Terraform Cloud to version control systems (VCSs) like GitHub, GitLab, and others, allowing it to automatically propose infrastructure changes when you commit configuration changes to VCS. This lets you manage changes to your infrastructure through version control, as you would with application code.
-
-### Install and Configure Terraform
-
-If you haven't already done so, install and configure Terraform using one of the following options:
-
-- [Configure Terraform in Azure Cloud Shell with Bash](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-cloud-shell-bash)
-- [Configure Terraform in Azure Cloud Shell with PowerShell](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-cloud-shell-powershell)
-- [Configure Terraform in Windows with Bash](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-windows-bash)
-- [Configure Terraform in Windows with PowerShell](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-windows-powershell)
 
 **You are now ready to move on to module [001-BaseAKSDeployment](../001-BaseAKSDeployment/README..md) to deploy your first AKS Terraform resource!**
